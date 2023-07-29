@@ -18,7 +18,6 @@ public class CashwiseBankAccountTests {
         Response response = RestAssured.given().auth().oauth2(token).
                 get(Config.getValue("cashwiseApiUrl")+"api/myaccount/bankaccount");
         System.out.println(response.statusCode());
-        //response.prettyPrint();
 
         int size = response.jsonPath().getInt("$.size()");
         System.out.println(size);
@@ -27,8 +26,7 @@ public class CashwiseBankAccountTests {
            String bankAccountName = response.jsonPath().getString("["+i+"].bank_account_name");
            String typeOfPay = response.jsonPath().getString("["+i+"].type_of_pay");
            String balance = response.jsonPath().getString("["+i+"].balance");
-           //System.out.println(balance);
-           //System.out.println("__________$");
+
            Assert.assertFalse("bank account name is empty: " + i,bankAccountName.trim().isEmpty());
            Assert.assertFalse("type of pay is empty: " + i,typeOfPay.trim().isEmpty());
            Assert.assertFalse("balance is empty: " + i,balance.trim().isEmpty());
